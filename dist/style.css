@@ -1,0 +1,42 @@
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.player-card {
+    background-color: #2d2d2d;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    width: 300px;
+}
+.controls button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.controls button:hover {
+    background-color: #45a049;
+}
+#img-div {
+    width: 45%;
+}
+#disc {
+    width: 70%;
+    margin-top: 8%;
+    border-radius: 50%;
+    filter:
+    drop-shadow(0 10px 10px rgba(0, 0, 0, 0.7))
+    drop-shadow(0 0 20px rgba(120, 0, 0, 0.3))
+    drop-shadow(0 25px 35px rgba(60, 0, 0, 0.4));
+}
