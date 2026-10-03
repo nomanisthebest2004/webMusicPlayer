@@ -13,11 +13,13 @@ const volumeLvl = document.getElementById("volume-lvl") as HTMLSpanElement;
 const defaultAudioSrc = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
 const defaultDiscSrc = './vinyl.jpg';
 const defaultAudioVolume = 0.5;
+const defaultTrackTitle = 'Track Loaded';
 
 audio.src = defaultAudioSrc;
 disc.src = defaultDiscSrc;
 audio.volume = defaultAudioVolume;
 volumeLvl.innerText = '50';
+trackTitle.innerText = defaultTrackTitle;
 
 export let isPlaying = false;
 export function setIsPlaying(flag: boolean) {
@@ -29,6 +31,9 @@ export function setAudioSrc(audioUrl: string) {
 export function setDiscSrc(discUrl: string) {
     disc.src = discUrl;
 }
+export function setTrackTitle (title: string) {
+    trackTitle.innerText = title;
+}
 
 audio.addEventListener("error", () => {
     audio.src = defaultAudioSrc;
@@ -37,10 +42,9 @@ audio.addEventListener("error", () => {
 playButton.addEventListener('click', ()=> {
     audio.play();
     trackStatus.innerText = `Playing`;
-    trackTitle.innerText = `Track Loaded`;
     if (isPlaying === false){
         isPlaying = true;
-        requestAnimationFrame(rotateDisc);
+        rotateDisc();
     }
 });
 pauseButton.addEventListener('click', ()=> {
@@ -53,10 +57,9 @@ stopButton.addEventListener('click', ()=> {
     audio.currentTime = 0;
     if (isPlaying === true) {
         isPlaying = false;
-        requestAnimationFrame(setDiscToZero);
+        setDiscToZero();
     }
-    trackStatus.innerText = `Stopped`;
-    trackTitle.innerText = `No Track Loaded`;
+    trackStatus.innerText = 'Stopped';
 });
 audio.addEventListener('ended', () => {
     isPlaying = false;

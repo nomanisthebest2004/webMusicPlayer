@@ -22,7 +22,7 @@ export function setDiscToZero() {
     }
     disc.style.transform = `rotate(${angle}deg)`;
     if (angle <= 0 || angle >=  360 || isPlaying === true) {
-        disc.style.transform = `rotate(${angle}deg)`;
+        disc.style.transform = `rotate(0deg)`;
         return;
     }
     requestAnimationFrame(setDiscToZero);

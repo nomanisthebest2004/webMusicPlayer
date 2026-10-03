@@ -1,12 +1,18 @@
-import { setIsPlaying, setAudioSrc, setDiscSrc, isPlaying  } from "./player.js";
-import { setDiscToZero } from "./discRotation.js";
+import { Buffer } from "buffer";
 
-// const audio = document.getElementById("audio-element") as HTMLAudioElement;
+globalThis.Buffer = Buffer;
+
+
+import { setIsPlaying, setAudioSrc, setDiscSrc, setTrackTitle } from "./player.js";
+import { setDiscToZero } from "./discRotation.js";
+import { readMusicMetadata } from "./metaData.js";
+import { showLyrics } from "./lyrics.js";
+
 const dropZone = document.querySelector(".drop-zone") as HTMLElement;
 const image = document.querySelector("img") as HTMLImageElement;
 const trackStatus = document.getElementById("track-status") as HTMLElement;
 const trackTitle = document.getElementById("track-title") as HTMLElement;
-
+const defaultDiscSrc = './vinyl.jpg';
 export let droppedUrl: string;
 
 dropZone.addEventListener("dragover", (event) => {
@@ -22,36 +28,53 @@ dropZone.addEventListener("dragleave", (event) => {
 dropZone.addEventListener("drop", (event) => {
     event.preventDefault();
     image.classList.remove('itemDrop')
-    
+
     const file = event.dataTransfer?.files[0];
-    
+
     if (!file) {
         return;
     }
     droppedUrl = URL.createObjectURL(file);
-
-    const audio = new Audio();
-    audio.src = droppedUrl;
-    audio.oncanplay = () => {
-        setAudioSrc(droppedUrl);
-        trackStatus.innerText = `Stopped`;
-        trackTitle.innerText = `Track Loaded`;
-        setIsPlaying(false);
-        setDiscToZero();
+    const img = new Image();
+    img.src = droppedUrl;
+    
+    img.onload = () => {
+        setDiscSrc(droppedUrl);
     };
+    
+    img.onerror = async () => {
+        const metaData = await readMusicMetadata(file);
 
-    audio.onerror = (e) => {
-        const img = new Image();
-        img.src = droppedUrl;
-
-        img.onload = () => {
-            setDiscSrc(droppedUrl);
+        //console.log(metaData);
+        if (metaData.artwork?.url) {
+            setDiscSrc(metaData.artwork?.url);
+        } else {
+            setDiscSrc(defaultDiscSrc);
+        }
+        showLyrics(metaData.lyrics);
+        
+        const audio = new Audio();
+        audio.src = droppedUrl;
+        audio.oncanplay = () => {
+            setAudioSrc(droppedUrl);
+            trackStatus.innerText = `Stopped`;
+            if (metaData.title) {
+                if (metaData.artist) {
+                    setTrackTitle(metaData.title + ' - ' + metaData.artist);
+                } else {
+                    setTrackTitle(metaData.title);
+                }
+            } else {
+                setTrackTitle('Track');
+            }
+            setIsPlaying(false);
+            setDiscToZero();
         };
 
-        img.onerror = () => {
+        audio.onerror = (e) => {
             alert("Not an image or music file. Default Music has been loaded");
         };
-
-        img.src = droppedUrl;
     };
+
+    img.src = droppedUrl;
 });
