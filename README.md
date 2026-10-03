@@ -16,3 +16,7 @@ A simple web-based music player for playing local music files directly in your b
 4. Drag and drop an image to set the disc artwork.
 
 > Your music files remain local to your device and are not uploaded to a server.
+
+## Demo
+
+[▶️ Watch the demo]([https://drive.google.com/file/d/YOUR_FILE_ID/view](https://drive.google.com/file/d/1W3Xb93GU3KaQzGprA1Tns9wbS_T9St69/view?usp=sharing))
