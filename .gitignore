@@ -1,3 +1,6 @@
 dist/app.d.ts
 dist/app.d.ts.map
 dist/app.js.map
+node_modules/
+package-lock.json
+package.json

@@ -11,12 +11,16 @@ const disc = document.getElementById("disc") as HTMLImageElement;
 const volumeLvl = document.getElementById("volume-lvl") as HTMLSpanElement;
 
 const defaultAudioSrc = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
-const defaultDiscSrc = './vinyl.jpg';
+const discSrc = ['./img/default01.png', './img/default02.png'];
+export function defaultDiscSrc() : string {
+    const index = Math.random() < 0.5 ? 0 : 1;
+    return discSrc[index] as string;
+}
 const defaultAudioVolume = 0.5;
 const defaultTrackTitle = 'Track Loaded';
 
 audio.src = defaultAudioSrc;
-disc.src = defaultDiscSrc;
+setDiscSrc(defaultDiscSrc() as string);
 audio.volume = defaultAudioVolume;
 volumeLvl.innerText = '50';
 trackTitle.innerText = defaultTrackTitle;
@@ -34,6 +38,7 @@ export function setDiscSrc(discUrl: string) {
 export function setTrackTitle (title: string) {
     trackTitle.innerText = title;
 }
+
 
 audio.addEventListener("error", () => {
     audio.src = defaultAudioSrc;
@@ -57,8 +62,8 @@ stopButton.addEventListener('click', ()=> {
     audio.currentTime = 0;
     if (isPlaying === true) {
         isPlaying = false;
-        setDiscToZero();
     }
+    setDiscToZero();
     trackStatus.innerText = 'Stopped';
 });
 audio.addEventListener('ended', () => {

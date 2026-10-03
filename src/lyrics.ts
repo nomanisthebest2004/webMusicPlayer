@@ -17,7 +17,7 @@ export function showLyrics(lyrics: string[] | null) {
         }
         if (cleanedLine === '') return;
         const match = cleanedLine.match(/\]\s*(.*)/);
-        cleanedLine = match ? match[1] : cleanedLine.trim();
+        cleanedLine = match ? match[1] as string: cleanedLine.trim() as string;
         
         const lineHolder = document.createElement('h3');
         lineHolder.innerText = cleanedLine;

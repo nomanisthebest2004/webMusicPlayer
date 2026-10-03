@@ -19136,11 +19136,15 @@
   var disc2 = document.getElementById("disc");
   var volumeLvl = document.getElementById("volume-lvl");
   var defaultAudioSrc = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
-  var defaultDiscSrc = "./vinyl.jpg";
+  var discSrc = ["./img/default01.png", "./img/default02.png"];
+  function defaultDiscSrc() {
+    const index = Math.random() < 0.5 ? 0 : 1;
+    return discSrc[index];
+  }
   var defaultAudioVolume = 0.5;
   var defaultTrackTitle = "Track Loaded";
   audio.src = defaultAudioSrc;
-  disc2.src = defaultDiscSrc;
+  setDiscSrc(defaultDiscSrc());
   audio.volume = defaultAudioVolume;
   volumeLvl.innerText = "50";
   trackTitle.innerText = defaultTrackTitle;
@@ -19179,8 +19183,8 @@
     audio.currentTime = 0;
     if (isPlaying === true) {
       isPlaying = false;
-      setDiscToZero();
     }
+    setDiscToZero();
     trackStatus.innerText = "Stopped";
   });
   audio.addEventListener("ended", () => {
@@ -19226,14 +19230,12 @@
       trackNumber: common.track?.no ?? null,
       discNumber: common.disk?.no ?? null,
       lyrics: common.lyrics ?? null,
-      // Technical information
       duration: metadata.format.duration ?? null,
       bitrate: metadata.format.bitrate ?? null,
       sampleRate: metadata.format.sampleRate ?? null,
       channels: metadata.format.numberOfChannels ?? null,
       codec: metadata.format.codec ?? null,
       container: metadata.format.container ?? null,
-      // Artwork
       hasArtwork: artwork !== null,
       artwork
     };
@@ -19272,7 +19274,6 @@
   var image = document.querySelector("img");
   var trackStatus2 = document.getElementById("track-status");
   var trackTitle2 = document.getElementById("track-title");
-  var defaultDiscSrc2 = "./vinyl.jpg";
   var droppedUrl;
   dropZone.addEventListener("dragover", (event) => {
     event.preventDefault();
@@ -19300,7 +19301,7 @@
       if (metaData.artwork?.url) {
         setDiscSrc(metaData.artwork?.url);
       } else {
-        setDiscSrc(defaultDiscSrc2);
+        setDiscSrc(defaultDiscSrc());
       }
       showLyrics(metaData.lyrics);
       const audio2 = new Audio();

@@ -1,6 +1,6 @@
 body {
   font-family: 'kalpurush';
-  background-color: #1a1a1a;
+  background-color: #170101;
   color: #ffffff;
   display: flex;
   flex-direction: row;
@@ -10,9 +10,14 @@ body {
   margin: 0;
   gap: 15vh;
 }
-
+#track-title{
+  color: #d65252;
+}
+#track-status{
+  color: #a5a5a5;
+}
 .player-card {
-  background-color: #2d2d2d;
+  background-color: #241616;
   padding: 30px;
   border-radius: 12px;
   text-align: center;
@@ -20,7 +25,7 @@ body {
   width: 23%;
 }
 .controls button {
-  background-color: #4CAF50;
+  background-color: #262704;
   color: white;
   border: none;
   padding: 12px 16px;
@@ -30,11 +35,11 @@ body {
 }
 
 .controls button:hover {
-  background-color: #45a049;
+  background-color: #1e4621;
 }
 #lyrics-box {
   display: none;
-  background-color: #2d2d2d;
+  background-color: #241616;
   padding: 30px;
   border-radius: 12px;
   text-align: center;

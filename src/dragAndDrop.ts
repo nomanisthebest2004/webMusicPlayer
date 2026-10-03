@@ -1,9 +1,7 @@
 import { Buffer } from "buffer";
-
 globalThis.Buffer = Buffer;
 
-
-import { setIsPlaying, setAudioSrc, setDiscSrc, setTrackTitle } from "./player.js";
+import { setIsPlaying, setAudioSrc, setDiscSrc, setTrackTitle, defaultDiscSrc } from "./player.js";
 import { setDiscToZero } from "./discRotation.js";
 import { readMusicMetadata } from "./metaData.js";
 import { showLyrics } from "./lyrics.js";
@@ -12,7 +10,6 @@ const dropZone = document.querySelector(".drop-zone") as HTMLElement;
 const image = document.querySelector("img") as HTMLImageElement;
 const trackStatus = document.getElementById("track-status") as HTMLElement;
 const trackTitle = document.getElementById("track-title") as HTMLElement;
-const defaultDiscSrc = './vinyl.jpg';
 export let droppedUrl: string;
 
 dropZone.addEventListener("dragover", (event) => {
@@ -49,7 +46,7 @@ dropZone.addEventListener("drop", (event) => {
         if (metaData.artwork?.url) {
             setDiscSrc(metaData.artwork?.url);
         } else {
-            setDiscSrc(defaultDiscSrc);
+            setDiscSrc(defaultDiscSrc());
         }
         showLyrics(metaData.lyrics);
         
