@@ -19135,7 +19135,7 @@
   var volume = document.getElementById("volume");
   var disc2 = document.getElementById("disc");
   var volumeLvl = document.getElementById("volume-lvl");
-  var defaultAudioSrc = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+  var defaultAudioSrc = "./music/default.opus";
   var discSrc = ["./img/default01.png", "./img/default02.png"];
   function defaultDiscSrc() {
     const index = Math.random() < 0.5 ? 0 : 1;

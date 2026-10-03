@@ -10,7 +10,7 @@ const volume = document.getElementById("volume") as HTMLInputElement;
 const disc = document.getElementById("disc") as HTMLImageElement;
 const volumeLvl = document.getElementById("volume-lvl") as HTMLSpanElement;
 
-const defaultAudioSrc = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
+const defaultAudioSrc = './music/default.opus';
 const discSrc = ['./img/default01.png', './img/default02.png'];
 export function defaultDiscSrc() : string {
     const index = Math.random() < 0.5 ? 0 : 1;
