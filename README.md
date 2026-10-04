@@ -19,5 +19,6 @@ A simple web-based music player for playing local music files directly in your b
 
 ## Demo
 
-[▶️ Watch the demo on Google Drive](https://drive.google.com/file/d/1W3Xb93GU3KaQzGprA1Tns9wbS_T9St69/view?usp=sharing)
-[🌐 Deploy](https://nomanisthebest2004.github.io/webMusicPlayer/)
+[▶️ Watch the demo on Google Drive](https://drive.google.com/file/d/1W3Xb93GU3KaQzGprA1Tns9wbS_T9St69/view?usp=sharing
+
+[Deploy](https://nomanisthebest2004.github.io/webMusicPlayer/)
